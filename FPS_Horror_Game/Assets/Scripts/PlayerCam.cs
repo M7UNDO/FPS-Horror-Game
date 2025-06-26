@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,8 +21,10 @@ public class PlayerCam : MonoBehaviour
 
     private void Start()
     {
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        //StartCoroutine(FetchPlay());
     }
 
     private void OnEnable()
@@ -51,6 +54,13 @@ public class PlayerCam : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         playerOrientation.rotation = Quaternion.Euler(0, yRotation, 0);
+    }
+
+    IEnumerator FetchPlay()
+    {
+        yield return new WaitForSeconds(7f);
+        playerOrientation = GameObject.Find("Player").transform.GetChild(1).GetComponent<Transform>();
+
     }
 }
 
